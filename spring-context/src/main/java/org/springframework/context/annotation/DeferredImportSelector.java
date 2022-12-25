@@ -34,6 +34,7 @@ import org.springframework.lang.Nullable;
  * @author Phillip Webb
  * @author Stephane Nicoll
  * @since 4.0
+ * 是ImportSelector的一个扩展
  */
 public interface DeferredImportSelector extends ImportSelector {
 

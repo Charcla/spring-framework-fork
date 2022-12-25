@@ -26,6 +26,9 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 13 May 2001
  * @see PropertyValue
+ *
+ * 解析bean工厂中对其他bean的任何运行时引用
+ * spring获取bean时候，需要把配置的属性值解析到PropertyValues，然后填充到BeanWrapper
  */
 public interface PropertyValues {
 

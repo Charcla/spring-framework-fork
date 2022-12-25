@@ -41,6 +41,9 @@ import org.springframework.beans.BeansException;
  * @since 06.07.2003
  * @see BeanPostProcessor
  * @see PropertyResourceConfigurer
+ * 这个接口是用来修改定义beandefinition信息，但是不能去提前实例化bean，否则破坏了生命周期中的顺序，
+ * 可能让后续的处理器无法使用，在所有beandefinition信息加载完成以后会回调此接口
+ * 因为此接口要早与spring中bean的实例化，所以设置为懒加载也没用，这个东西要在bean实例化前才有意义
  */
 @FunctionalInterface
 public interface BeanFactoryPostProcessor {
@@ -52,6 +55,8 @@ public interface BeanFactoryPostProcessor {
 	 * properties even to eager-initializing beans.
 	 * @param beanFactory the bean factory used by the application context
 	 * @throws org.springframework.beans.BeansException in case of errors
+	 * 在所有的beandefinition加载到容器后，回掉这个接口，修改beandefinition信息
+	 * 比如@value占位符（PropertySourcesPlaceholderConfigurer），把配置文件实际值注入到字段属性
 	 */
 	void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException;
 

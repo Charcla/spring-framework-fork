@@ -108,7 +108,9 @@ import org.springframework.util.ReflectionUtils;
  * @since 3.1
  * @see #onStartup(Set, ServletContext)
  * @see WebApplicationInitializer
+ * 是一个SPI实现类
  */
+//这个注解表示当前ServletContainerInitializer能处理的类型是WebApplicationInitializer
 @HandlesTypes(WebApplicationInitializer.class)
 public class SpringServletContainerInitializer implements ServletContainerInitializer {
 

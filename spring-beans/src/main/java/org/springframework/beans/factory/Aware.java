@@ -31,6 +31,8 @@ package org.springframework.beans.factory;
  * @author Chris Beams
  * @author Juergen Hoeller
  * @since 3.1
+ *
+ * 这个接口用于提供spring内部的各个组件
  */
 public interface Aware {
 

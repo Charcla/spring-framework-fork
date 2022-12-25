@@ -44,6 +44,8 @@ import org.springframework.util.ReflectionUtils;
  *
  * @author Juergen Hoeller
  * @since 2.5
+ * 用来管理注入元数据的内部类，不是直接给应用用的
+ * 存储了某个类，以及某个类里面需要注入的属性或者方法等（比如@Autowired，@Value等标记的）
  */
 public class InjectionMetadata {
 
@@ -77,7 +79,7 @@ public class InjectionMetadata {
 		}
 		this.checkedElements = checkedElements;
 	}
-
+	//这里进行注入
 	public void inject(Object target, @Nullable String beanName, @Nullable PropertyValues pvs) throws Throwable {
 		Collection<InjectedElement> checkedElements = this.checkedElements;
 		Collection<InjectedElement> elementsToIterate =

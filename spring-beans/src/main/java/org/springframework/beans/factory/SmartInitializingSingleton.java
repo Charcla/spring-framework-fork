@@ -40,6 +40,10 @@ package org.springframework.beans.factory;
  * @author Juergen Hoeller
  * @since 4.1
  * @see org.springframework.beans.factory.config.ConfigurableListableBeanFactory#preInstantiateSingletons()
+ *
+ * 在所有单例bean都初始化以后(就是创建完成，放到一级缓存)，回调这个接口
+ * 注意：不要在此接口中使用ioc容器管理的其他bean，因为其他beankennel还没有通过其他后置处理器的增强
+ * @PostConstruct是最先被执行的，然后是InitializingBean，最后是SmartInitializingSingleton
  */
 public interface SmartInitializingSingleton {
 
@@ -52,6 +56,7 @@ public interface SmartInitializingSingleton {
 	 * lazily initialized on demand after {@link BeanFactory} bootstrap,
 	 * and not for any other bean scope either. Carefully use it for beans
 	 * with the intended bootstrap semantics only.
+	 * 所有单例对象都是实例化完成之后就会回调这个接口实现类的此方法。
 	 */
 	void afterSingletonsInstantiated();
 
