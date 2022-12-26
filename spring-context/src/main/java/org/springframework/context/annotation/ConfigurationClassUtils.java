@@ -80,6 +80,9 @@ abstract class ConfigurationClassUtils {
 	 * @param beanDef the bean definition to check
 	 * @param metadataReaderFactory the current factory in use by the caller
 	 * @return whether the candidate qualifies as (any kind of) configuration class
+	 * 判断beanDef是不是有@Configuration，@Bean等那几个注解，如果是返回true
+	 * 如果是@Configuration，那么设置对应的BeanDefinition为full;
+	 * 如果是@Bean,@Component,@ComponentScan,@Import,@ImportResource，则为lite
 	 */
 	public static boolean checkConfigurationClassCandidate(
 			BeanDefinition beanDef, MetadataReaderFactory metadataReaderFactory) {

@@ -34,6 +34,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  * @author Juergen Hoeller
  * @since 2.5
  * @see org.springframework.beans.factory.config.ConfigurableBeanFactory#getMergedBeanDefinition
+ * 可以用来做一些依赖注入，属性填充，比如@Autowired，@value
  */
 public interface MergedBeanDefinitionPostProcessor extends BeanPostProcessor {
 

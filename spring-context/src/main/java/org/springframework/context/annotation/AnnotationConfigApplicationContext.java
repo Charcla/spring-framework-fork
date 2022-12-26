@@ -52,9 +52,11 @@ import org.springframework.util.Assert;
  * @see org.springframework.context.support.GenericXmlApplicationContext
  */
 public class AnnotationConfigApplicationContext extends GenericApplicationContext implements AnnotationConfigRegistry {
-
+	//扫描指定的类，读取注解的Bean定义读取器
 	private final AnnotatedBeanDefinitionReader reader;
-
+	//用来扫描指定路径下@Component的类极其派生类，路径扫描器
+	//然后转换为bd
+	//spring中默认的扫描包不是这个对象，而是自己new的一个ClassPathbeanDefinitionScanner
 	private final ClassPathBeanDefinitionScanner scanner;
 
 
@@ -85,7 +87,9 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... componentClasses) {
 		this();
+		//传入配置类
 		register(componentClasses);
+		//spring容器中最为重要的方法了
 		refresh();
 	}
 

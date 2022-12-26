@@ -43,6 +43,7 @@ import org.springframework.lang.Nullable;
  * @since 1.2
  * @see org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#setCustomTargetSourceCreators
  * @see org.springframework.aop.framework.autoproxy.target.LazyInitTargetSourceCreator
+ * 可在目标对象实例化前后进行修改
  */
 public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 
@@ -69,6 +70,9 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	 * @see #postProcessAfterInstantiation
 	 * @see org.springframework.beans.factory.support.AbstractBeanDefinition#getBeanClass()
 	 * @see org.springframework.beans.factory.support.AbstractBeanDefinition#getFactoryMethodName()
+	 * 在目标对象实例化之前调用，
+	 * 如果返回不为null，那么就跳过别的InstantiationAwareBeanPostProcessor处理器，直接跳出循环了,并且也跳过正常的实例化，去执行postProcessAfterInitialization()方法
+	 * 如果返回null，那么就继续执行别的InstantiationAwareBeanPostProcessor处理器的postProcessBeforeInstantiation()方法
 	 */
 	@Nullable
 	default Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
@@ -89,6 +93,9 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	 * instances being invoked on this bean instance.
 	 * @throws org.springframework.beans.BeansException in case of errors
 	 * @see #postProcessBeforeInstantiation
+	 * 实例化之后调用
+	 * 如果返回true，继续向后执行逻辑，执行别的处理器
+	 * 如果返回false，则跳出循环，后续不再走spring的初始化流程
 	 */
 	default boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
 		return true;
@@ -137,7 +144,7 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	 * @throws org.springframework.beans.BeansException in case of errors
 	 * @see #postProcessProperties
 	 * @see org.springframework.beans.MutablePropertyValues
-	 * @deprecated as of 5.1, in favor of {@link #postProcessProperties(PropertyValues, Object, String)}
+	 * 修改属性值，如果postProcessAfterInstantiation()返回false,则该方法不被调用
 	 */
 	@Deprecated
 	@Nullable

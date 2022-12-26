@@ -45,6 +45,7 @@ import java.beans.PropertyDescriptor;
  * @see org.springframework.beans.factory.BeanFactory
  * @see org.springframework.validation.BeanPropertyBindingResult
  * @see org.springframework.validation.DataBinder#initBeanPropertyAccess()
+ * 是一个用来操作javabean属性的工具，使用它可以直接修改一个bean对象的属性
  */
 public interface BeanWrapper extends ConfigurablePropertyAccessor {
 

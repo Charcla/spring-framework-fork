@@ -174,6 +174,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	private final Map<Class<?>, String[]> singletonBeanNamesByType = new ConcurrentHashMap<>(64);
 
 	/** List of bean definition names, in registration order. */
+	//保存所有的beanDefinition名字
 	private volatile List<String> beanDefinitionNames = new ArrayList<>(256);
 
 	/** List of names of manually registered singletons, in registration order. */
@@ -489,6 +490,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		return getBeanNamesForType(type, true, true);
 	}
 
+	//返回这个type类型的所有实现类的名称
 	@Override
 	public String[] getBeanNamesForType(@Nullable Class<?> type, boolean includeNonSingletons, boolean allowEagerInit) {
 		if (!isConfigurationFrozen() || type == null || !allowEagerInit) {
@@ -871,11 +873,17 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		List<String> beanNames = new ArrayList<>(this.beanDefinitionNames);
 
 		// Trigger initialization of all non-lazy singleton beans...
+		//循环所有的bean定义名称
 		for (String beanName : beanNames) {
+			//合并bean定义，转换为统一的RootBeanDefinition类型
+			//因为用不同的注解或者别的，生成的bean定义的名称是不一样的
 			RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
 			if (!bd.isAbstract() && bd.isSingleton() && !bd.isLazyInit()) {
+				//判断是不是工厂bean（和beanFactory无关）
 				if (isFactoryBean(beanName)) {
+					//先去加载这个factorybean本身，用的名字是&beanName
 					Object bean = getBean(FACTORY_BEAN_PREFIX + beanName);
+					//这里判断是是否要在容器启动阶段就加载getObject()中返回的bean
 					if (bean instanceof FactoryBean) {
 						FactoryBean<?> factory = (FactoryBean<?>) bean;
 						boolean isEagerInit;
@@ -888,6 +896,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 							isEagerInit = (factory instanceof SmartFactoryBean &&
 									((SmartFactoryBean<?>) factory).isEagerInit());
 						}
+						//如果允许提前暴露，那么直接在这里加载bean，就是调用getObject方法
+						//如果不允许，那么会在以后get的时候才加载
 						if (isEagerInit) {
 							getBean(beanName);
 						}
@@ -911,6 +921,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 					}, getAccessControlContext());
 				}
 				else {
+					//所有bean创建完成以后（）
 					smartSingleton.afterSingletonsInstantiated();
 				}
 			}

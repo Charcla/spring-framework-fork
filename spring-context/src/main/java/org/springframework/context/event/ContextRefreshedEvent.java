@@ -24,6 +24,7 @@ import org.springframework.context.ApplicationContext;
  * @author Juergen Hoeller
  * @since 04.03.2003
  * @see ContextClosedEvent
+ * 事件接口，在容器初始化完成会触发这个事件
  */
 @SuppressWarnings("serial")
 public class ContextRefreshedEvent extends ApplicationContextEvent {

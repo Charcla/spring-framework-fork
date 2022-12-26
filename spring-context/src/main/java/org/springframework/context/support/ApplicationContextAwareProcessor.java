@@ -58,6 +58,7 @@ import org.springframework.util.StringValueResolver;
  * @see org.springframework.context.MessageSourceAware
  * @see org.springframework.context.ApplicationContextAware
  * @see org.springframework.context.support.AbstractApplicationContext#refresh()
+ * 这个处理器是为了给那些实现Aware接口的类传入context
  */
 class ApplicationContextAwareProcessor implements BeanPostProcessor {
 
@@ -97,6 +98,7 @@ class ApplicationContextAwareProcessor implements BeanPostProcessor {
 			}, acc);
 		}
 		else {
+			//初始化前，去执行Aware接口
 			invokeAwareInterfaces(bean);
 		}
 
