@@ -69,6 +69,9 @@ dependencies {
 	testFixturesImplementation("org.junit.jupiter:junit-jupiter-api")
 	testFixturesImplementation("org.junit.jupiter:junit-jupiter-params")
 	testFixturesImplementation("org.xmlunit:xmlunit-assertj")
+
+	//每次编译后都需要设置这个jar，索性在这里写死
+	compile files('libs/kotlin-coroutines-5.2.8.RELEASE.jar')
 }
 
 jar {
