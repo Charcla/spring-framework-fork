@@ -43,7 +43,7 @@ package org.springframework.beans.factory;
  *
  * 在所有单例bean都初始化以后(就是创建完成，放到一级缓存)，回调这个接口
  * 注意：不要在此接口中使用ioc容器管理的其他bean，因为其他beankennel还没有通过其他后置处理器的增强
- * @PostConstruct是最先被执行的，然后是InitializingBean，最后是SmartInitializingSingleton
+ * PostConstruct是最先被执行的，然后是InitializingBean，最后是SmartInitializingSingleton
  */
 public interface SmartInitializingSingleton {
 

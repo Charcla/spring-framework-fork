@@ -1,6 +1,6 @@
 package com.charcl.study.bean;
 
-import com.charcl.study.bean.config.AppConfig2;
+import com.charcl.study.bean.config.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class T {

@@ -244,9 +244,9 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 	}
 
 
-	/**
-	 * 找到bean中所有需要依赖注入的字段，方法，封装成InjectionMetadata
-	 * 这里只是找，还没有真正的依赖注入
+	/** 。
+	 * 找到bean中所有需要依赖注入的字段，方法，封装成InjectionMetadata。
+	 * 这里只是找，还没有真正的依赖注入。
 	 * @param beanDefinition the merged bean definition for the bean
 	 * @param beanType the actual type of the managed bean instance
 	 * @param beanName the name of the bean
@@ -478,9 +478,9 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 		return metadata;
 	}
 
-	/**
-	 * 找到clazz中所有的注入点，也就是autowiredAnnotationTypes集合中的注解修饰的字段或者方法
-	 * @param clazz
+	/** 。
+	 * 找到clazz中所有的注入点，也就是autowiredAnnotationTypes集合中的注解修饰的字段或者方法。
+	 * @param clazz 类。
 	 * @return
 	 */
 	private InjectionMetadata buildAutowiringMetadata(final Class<?> clazz) {
