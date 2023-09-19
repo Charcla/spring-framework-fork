@@ -50,6 +50,7 @@ import org.springframework.util.Assert;
  * @author Juergen Hoeller
  * @see GenericBeanDefinition
  * @see ChildBeanDefinition
+ * 描述bean的信息的一个类，beanDefinition类有好多的，别的类定义需要转换为这个通用的
  */
 @SuppressWarnings("serial")
 public class RootBeanDefinition extends AbstractBeanDefinition {
@@ -61,6 +62,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	private AnnotatedElement qualifiedElement;
 
 	/** Determines if the definition needs to be re-merged. */
+	//如果是RootBeanDefinition，那么不需要再合并了，别的类型才需要合并
 	volatile boolean stale;
 
 	boolean allowCaching = true;

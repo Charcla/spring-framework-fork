@@ -619,7 +619,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			}
 		}
 
-		if (earlySingletonExposure) {//再次从集合中找这个bean，因为集合中可能已经有了
+		if (earlySingletonExposure) {//再次从集合中找这个bean，因为集合中可能已经有了（循环依赖时候放进去的？）
 			Object earlySingletonReference = getSingleton(beanName, false);
 			if (earlySingletonReference != null) {
 				if (exposedObject == bean) {

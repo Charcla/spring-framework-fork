@@ -183,6 +183,10 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 	private MethodOverrides methodOverrides = new MethodOverrides();
 
+	/**
+	 * 存放配置的initMethod方法，@Bean注解有这个属性
+	 * 像@PostConstruct方法不会记录再这里面
+	 */
 	@Nullable
 	private String initMethodName;
 
